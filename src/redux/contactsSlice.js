@@ -11,9 +11,9 @@ export const contacts = [
 const slice = createSlice({
     name: "contact",
     initialState: {
-        contacts
+        items: contacts,
     },
-     reducers: {
+       reducers: {
         addContact: {
             reducer(state, action) {
                  state.items.push(action.payload)

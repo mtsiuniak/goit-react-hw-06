@@ -4,12 +4,13 @@ import { nanoid } from '@reduxjs/toolkit';
 
 export default function ContactList() {
   
-  const contacts = useSelector((state) => state.items.contacts);
+  const contacts = useSelector((state) => state.items.items);
   const search = useSelector((state) => state.filters.name);
-
+  
 
   const filterContacts = contacts.filter(contact =>
-  contact.name.toLowerCase().includes(search.trim().toLowerCase())) 
+    contact.name.toLowerCase().includes(search.trim().toLowerCase())) 
+  
   
   
   return (
