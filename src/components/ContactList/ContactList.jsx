@@ -1,14 +1,33 @@
-import css from "./ContactList.module.css";
+import { useSelector } from "react-redux";
 import Contact from "../Contact/Contact";
+import { nanoid } from '@reduxjs/toolkit';
 
-export default function ContactList({ data, onDeleteContact }) {
+export default function ContactList() {
+  
+  const contacts = useSelector((state) => state.items.items);
+  const search = useSelector((state) => state.filters.name);
+
+
+  const filterContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(search.trim().toLowerCase())) //
+    
   return (
-    <ul className={css.list}>
-      {data.map((contact) => (
-        <li className={css.item} key={contact.id}>
-          <Contact list={contact} onDeleteContact={onDeleteContact}/>
-        </li>
-      ))}
-    </ul>
+    <>
+      {contacts.length !== 0 ? (
+        <ul >
+          {filterContacts.map(contact => (
+            <li  key={nanoid()}>
+              <Contact data={contact} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p >No contacts yet </p>
+      )}
+
+      {!filterContacts.length && contacts.length !== 0 && (
+        <p >No contacts found </p>
+      )}
+    </>
   );
 }

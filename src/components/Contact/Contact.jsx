@@ -1,10 +1,13 @@
 import css from './Contact.module.css'
 import { AiFillPhone } from "react-icons/ai";
 import { IoPerson } from "react-icons/io5";
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
 
-export default function Contact({ onDeleteContact, list: {id, name, number }, }) {
+export default function Contact({ data: { id, name, number }, }) {
+    const dispatch = useDispatch();
     const handleDelete = () => {
-        onDeleteContact(id);
+        dispatch(deleteContact(id));
     };
     
     return <div className={css.container}>
