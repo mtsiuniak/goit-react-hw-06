@@ -8,8 +8,12 @@ const contacts = [
 ];
 
 const slice = createSlice({
-  name: "contact",
-  initialState: contacts,
+  name: "contacts",
+  initialState: {
+    contacts: {
+      items: contacts
+    }
+  },
   reducers: {
     addContact: {
       reducer(state, action) {
@@ -20,14 +24,14 @@ const slice = createSlice({
           payload: {
             ...values,
             id: crypto.randomUUID(),
-          }
+          },
         };
-      }
+      },
     },
     deleteContact(state, action) {
       return state.filter(contact => contact.id !== action.payload);
-    }
-  }
+    },
+  },
 });
 
 export const { addContact, deleteContact } = slice.actions;

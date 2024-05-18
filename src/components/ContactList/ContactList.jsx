@@ -1,33 +1,32 @@
 import { useSelector } from "react-redux";
 import Contact from "../Contact/Contact";
-import { nanoid } from '@reduxjs/toolkit';
 
 export default function ContactList() {
-  
   const contacts = useSelector((state) => state.items);
   const search = useSelector((state) => state.filters.name);
-  // console.log(contacts);
+
+  console.log("list", contacts);
 
   const filterContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(search.trim().toLowerCase())) 
-  
+    contact.name.toLowerCase().includes(search.trim().toLowerCase())
+  );
 
   return (
     <>
       {contacts.length !== 0 ? (
-        <ul >
+        <ul>
           {filterContacts.map(contact => (
-            <li  key={nanoid()}>
+            <li key={contact.id}>
               <Contact data={contact} />
             </li>
           ))}
         </ul>
       ) : (
-        <p >No contacts yet </p>
+        <p>No contacts yet</p>
       )}
 
       {!filterContacts.length && contacts.length !== 0 && (
-        <p >No contacts found </p>
+        <p>No contacts found</p>
       )}
     </>
   );
