@@ -2,18 +2,18 @@ import { useSelector } from "react-redux";
 import Contact from "../Contact/Contact";
 
 export default function ContactList() {
-  const contacts = useSelector((state) => state.items);
+  const allContacts = useSelector((state) => state.items.items);
   const search = useSelector((state) => state.filters.name);
 
-  console.dir("list", contacts);
+  console.log("list", allContacts.length);
 
-  const filterContacts = contacts.filter(contact =>
+  const filterContacts = allContacts.filter(contact =>
     contact.name.toLowerCase().includes(search.trim().toLowerCase())
   );
 
   return (
     <>
-      {contacts.length !== 0 ? (
+      {allContacts.length !== 0 ? (
         <ul>
           {filterContacts.map(contact => (
             <li key={contact.id}>
@@ -25,7 +25,7 @@ export default function ContactList() {
         <p>No contacts yet</p>
       )}
 
-      {!filterContacts.length && contacts.length !== 0 && (
+      {!filterContacts.length && allContacts.length !== 0 && (
         <p>No contacts found</p>
       )}
     </>
